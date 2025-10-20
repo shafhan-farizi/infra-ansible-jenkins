@@ -18,9 +18,14 @@ pipeline {
         
         stage('Run Ansible Playbook') {
             steps {
-                sh 'source /opt/venv/bin/activate'
                 sshagent(['ansible-ssh-key']) {
-                    sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i host.ini deploy.yml || exit 1'
+                    sh '''
+                    # --- GUNAKAN PERINTAH TITIK (UNIVERSAL) ---
+                    . /opt/venv/bin/activate 
+                    
+                    # JALANKAN ANSIBLE
+                    ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i host.ini deploy.yml || exit 1
+                '''
                 }
             }
         }
