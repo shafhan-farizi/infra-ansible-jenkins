@@ -1,5 +1,5 @@
 - name: Install nginx
-  hosts: web
+  hosts: lmint_server
   become: true
   tasks:
     - name: Update apt cache
